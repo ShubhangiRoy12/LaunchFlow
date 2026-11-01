@@ -87,7 +87,7 @@ export default function WorkflowPage() {
       setActiveStage(5);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Generation failed.";
-      setError(/401|UNAUTHENTICATED|API key not valid/i.test(message) ? "Google could not authenticate the API key. Update GEMINI_API_KEY in .env.local and restart the server." : /429|RESOURCE_EXHAUSTED/i.test(message) ? "Google's generation quota is unavailable. Check billing and quota for the project connected to your API key." : message);
+      setError(/401|UNAUTHENTICATED|API key|GEMINI_API_KEY|\.env.local/i.test(message) ? "Video generation is temporarily unavailable. Please explore the sample videos or try again later." : /429|RESOURCE_EXHAUSTED/i.test(message) ? "The video provider's generation limit has been reached. Please try again later or explore the sample videos." : message);
     } finally {
       setLoading(false);
     }
@@ -120,6 +120,7 @@ export default function WorkflowPage() {
           <input value={websiteUrl} onChange={(event) => setWebsiteUrl(event.target.value)} style={styles.input} placeholder="https://stripe.com" />
 
           {error && <div style={styles.error}>{error}</div>}
+          {error && <Link href="/#examples" style={{ display: "inline-block", marginTop: 12, color: "#7950bd", fontWeight: 700 }}>Explore sample videos</Link>}
           <button onClick={generate} disabled={loading} style={styles.generate}>
             {loading ? <Loader2 size={19} /> : <Send size={19} />}
             {loading ? "Generating..." : "Generate Launch"}

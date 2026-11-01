@@ -17,9 +17,11 @@ export async function POST(request: Request) {
     const result = await generateVeoVideo(prompt);
     return NextResponse.json(result);
   } catch (error) {
+    const message = error instanceof Error ? error.message : "";
+    const quotaLimited = /429|RESOURCE_EXHAUSTED/i.test(message);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Veo generation failed." },
-      { status: 500 },
+      { error: quotaLimited ? "The video provider's generation limit has been reached. Please try again later or explore the sample videos." : "Video generation is temporarily unavailable. Please explore the sample videos or try again later." },
+      { status: quotaLimited ? 429 : 503 },
     );
   }
 }

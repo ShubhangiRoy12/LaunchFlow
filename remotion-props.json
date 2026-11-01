@@ -1,0 +1,18 @@
+{
+  "productName": "LaunchFlow AI",
+  "tagline": "AI Creative Director for Premium Product Launch Videos",
+  "audience": "Founders, product teams, creators, and marketing teams",
+  "features": [
+    "Website intelligence and brand extraction",
+    "AI creative brief and launch strategy",
+    "Storyboard and motion direction",
+    "Export-ready launch videos"
+  ],
+  "storyboard": [
+    "Hook",
+    "Problem",
+    "Product Reveal",
+    "Features",
+    "Launch CTA"
+  ]
+}
